@@ -3,6 +3,7 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 import v1Routes from "./api/v1/index";
+import v2Routes from "./api/v2/index";
 import { errorMiddleware } from "./middlewares/error.middleware";
 
 
@@ -14,5 +15,6 @@ app.use(compression());
 app.use(express.json());
 
 app.use('/api/v1', v1Routes);
+app.use('/api/v2', v2Routes);
 
 app.use(errorMiddleware);
