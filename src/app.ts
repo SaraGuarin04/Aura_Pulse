@@ -5,6 +5,9 @@ import helmet from 'helmet';
 import v1Routes from "./api/v1/index";
 import v2Routes from "./api/v2/index";
 import { errorMiddleware } from "./middlewares/error.middleware";
+import swaggerUi from "swagger-ui-express";
+import { openApiSpec } from "./config/openai";
+
 
 
 export const app = express();
@@ -16,5 +19,6 @@ app.use(express.json());
 
 app.use('/api/v1', v1Routes);
 app.use('/api/v2', v2Routes);
+app.use('/api/v2/docs', swaggerUi.serve, swaggerUi.setup(openApiSpec));
 
 app.use(errorMiddleware);
