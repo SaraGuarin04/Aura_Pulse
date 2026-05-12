@@ -16,7 +16,6 @@ API REST construida con **Node.js**, **Express**, **MongoDB** y **TypeScript**, 
 * **Swagger (OpenAPI)** → Documentación de API
 * **Helmet** → Seguridad HTTP
 * **CORS**
-* **Morgan** → Logging
 
 ---
 
