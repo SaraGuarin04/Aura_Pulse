@@ -10,6 +10,8 @@
     "jsonwebtoken": "^9.0.3",
     "mongodb": "^7.1.0",
     "node": "^25.8.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
     "zod": "^4.3.6"
   },
@@ -33,6 +35,9 @@
     "@types/helmet": "^0.0.48",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.5.0",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
     "typescript": "^6.0.2"
   }
 }
+
