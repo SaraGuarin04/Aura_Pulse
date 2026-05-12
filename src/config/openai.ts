@@ -15,7 +15,7 @@ export const openApiSpec = swaggerJsdoc({
         description: "Servidor local",
       },
       {
-        url: "https://aura-pulse-dz27.onrender.com/api/v2/docs/",
+        url: "https://aura-pulse-dz27.onrender.com/api/v2",
         description: "Servidor Producción",
       },
     ],
@@ -35,5 +35,5 @@ export const openApiSpec = swaggerJsdoc({
       },
     ],
   },
-  apis: [path.join(__dirname, "../modules/**/*.routes.{ts,js}")],
+  apis: ["./src/modules/**/*.ts", "./src/modules/**/*.js"],
 });
