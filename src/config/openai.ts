@@ -15,7 +15,7 @@ export const openApiSpec = swaggerJsdoc({
         description: "Servidor local",
       },
       {
-        url: "https://collaborate-ook5.onrender.com/api/v2",
+        url: "https://aura-pulse-dz27.onrender.com/api/v2/docs/",
         description: "Servidor Producción",
       },
     ],
