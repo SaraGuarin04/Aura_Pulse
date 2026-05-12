@@ -1,74 +1,67 @@
 🚀 Aura Pulse API - Node.js + Express + MongoDB
-API REST construida con Node.js, Express, MongoDB y TypeScript, diseñada para la gestión de acciones ecológicas, retos y logros, siguiendo una arquitectura modular y documentada con Swagger.
+API REST construida con Node.js, Express, MongoDB y TypeScript, siguiendo buenas prácticas como arquitectura modular, validaciones con Zod, documentación con Swagger y autenticación con JWT.
 
 📦 Tecnologías utilizadas
-Node.js & Express
+Node.js
 
-MongoDB (Mongoose)
+Express 5
+
+MongoDB
 
 TypeScript
 
-JWT (jsonwebtoken) → Autenticación segura
+JWT (jsonwebtoken) → Autenticación
 
 bcrypt → Encriptación de contraseñas
 
-Zod → Validación de esquemas y datos
+Zod → Validación de datos
 
-Swagger (OpenAPI) → Documentación interactiva
+Swagger (OpenAPI) → Documentación de API
 
-CORS & Morgan
+Helmet → Seguridad HTTP
+
+CORS
+
+Morgan → Logging
 
 📁 Estructura del proyecto
 Plaintext
 src/
 │
 ├── modules/
-│   ├── auth/          # Registro y Login
+│   ├── auth/          # Autenticación y JWT
 │   ├── users/         # Gestión de usuarios
 │   ├── actions/       # Acciones ecológicas
-│   ├── challenges/    # Retos globales
+│   ├── challenges/    # Retos y desafíos
 │   └── achievements/  # Logros y medallas
 │
-├── middlewares/       # Auth y Validaciones
-├── config/            # Variables de entorno
-├── database/          # Conexión a MongoDB
-└── server.ts          # Punto de entrada
+├── config/            # Variables de entorno y constantes
+├── middlewares/       # Validaciones y AuthMiddleware
+├── routes/            # Definición de rutas globales
+├── database/          # Configuración de MongoDB
+└── server.ts          # Punto de entrada de la aplicación
 ⚙️ Instalación
 Bash
-# Clonar el repositorio
 git clone https://github.com/SaraGuarin04/Aura_Pulse.git
-
-# Entrar a la carpeta
 cd Aura_Pulse
-
-# Instalar dependencias
 npm install
 🏃‍♂️ Ejecución
 Bash
-# Modo desarrollo
-npm run dev
-
-# Construir para producción
 npm run build
-
-# Iniciar producción
 npm start
 🔐 Autenticación
-La mayoría de las rutas requieren autenticación mediante un token Bearer.
-Para usarlo en Swagger o Postman:
-Authorization: Bearer <tu_token_jwt>
+Usa JWT:
+Authorization: Bearer <token>
 
-📚 Swagger (Documentación)
-Puedes visualizar y probar la API de forma interactiva en el siguiente enlace de Render:
+📚 Swagger
+https://aura-pulse.onrender.com/api/v2/docs/
 
-🔗 https://aura-pulse.onrender.com/api/v2/docs/
+📊 Scripts
+npm run build
 
-📊 Scripts disponibles
-npm run dev: Ejecuta el servidor con recarga automática.
+npm start
 
-npm run build: Compila el código TypeScript a JavaScript.
-
-npm start: Inicia el servidor compilado.
+npm run dev
 
 👩‍💻 Autora
 Sara Camila Guarín Guerrero
