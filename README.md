@@ -1,31 +1,28 @@
-🚀 Aura Pulse API - Node.js + Express + MongoDB
-API REST construida con Node.js, Express, MongoDB y TypeScript, siguiendo buenas prácticas como arquitectura modular, validaciones con Zod, documentación con Swagger y autenticación con JWT.
+# 🚀 Aura Pulse API - Node.js + Express + MongoDB
 
-📦 Tecnologías utilizadas
-Node.js
+API REST construida con **Node.js**, **Express**, **MongoDB** y **TypeScript**, siguiendo buenas prácticas como arquitectura modular, validaciones con Zod, documentación con Swagger y autenticación con JWT.
 
-Express 5
+---
 
-MongoDB
+### 📦 Tecnologías utilizadas
 
-TypeScript
+* **Node.js**
+* **Express 5**
+* **MongoDB**
+* **TypeScript**
+* **JWT (jsonwebtoken)** → Autenticación
+* **bcrypt** → Encriptación de contraseñas
+* **Zod** → Validación de datos
+* **Swagger (OpenAPI)** → Documentación de API
+* **Helmet** → Seguridad HTTP
+* **CORS**
+* **Morgan** → Logging
 
-JWT (jsonwebtoken) → Autenticación
+---
 
-bcrypt → Encriptación de contraseñas
+### 📁 Estructura del proyecto
 
-Zod → Validación de datos
-
-Swagger (OpenAPI) → Documentación de API
-
-Helmet → Seguridad HTTP
-
-CORS
-
-Morgan → Logging
-
-📁 Estructura del proyecto
-Plaintext
+```bash
 src/
 │
 ├── modules/
@@ -40,28 +37,44 @@ src/
 ├── routes/            # Definición de rutas globales
 ├── database/          # Configuración de MongoDB
 └── server.ts          # Punto de entrada de la aplicación
-⚙️ Instalación
-Bash
+```
+---
+## ⚙️ Instalación
+
+```bash
 git clone https://github.com/SaraGuarin04/Aura_Pulse.git
 cd Aura_Pulse
 npm install
-🏃‍♂️ Ejecución
-Bash
+```
+
+## 🏃‍♂️ Ejecución
+
+```bash
 npm run build
 npm start
-🔐 Autenticación
-Usa JWT:
+```
+---
+
+## 🔐 Autenticación
+Usa JWT para proteger las rutas privadas:
+```
 Authorization: Bearer <token>
+```
+---
 
-📚 Swagger
-https://aura-pulse.onrender.com/api/v2/docs/
+## 📚 Swagger
+Accede a la documentación interactiva en el siguiente enlace:
+```
+🔗 https://aura-pulse.onrender.com/api/v2/docs/
+```
+---
 
-📊 Scripts
+## 📊 Scripts
+
+```bash
 npm run build
-
 npm start
-
-npm run dev
-
-👩‍💻 Autora
+```
+---
+## 👩‍💻 Autora
 Sara Camila Guarín Guerrero
