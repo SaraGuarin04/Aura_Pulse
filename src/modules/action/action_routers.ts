@@ -22,14 +22,10 @@ const _controller = new ActionController();
  *           schema:
  *             type: object
  *             required:
- *               - userId
  *               - title
  *               - category
  *               - value
  *             properties:
- *               userId:
- *                   type: string
- *                   example: "65f1a2b3c4d5e6f7a8b9c0d1"
  *               title:
  *                    type: string
  *                    example: "Reciclaje de botellas PET"
