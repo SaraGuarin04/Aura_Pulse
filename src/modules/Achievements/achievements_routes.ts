@@ -67,21 +67,21 @@ router.get('/:id', authMiddleware, controller.getOne);
  *           schema:
  *             type: object
  *             required:
- *               - title
- *               - description
+ *               - name
+ *               - userId
  *             properties:
- *               title:
- *                 type: string
- *                 example: "Guardian del planeta"
- *               description:
- *                 type: string
- *                 example: "Completar 10 retos ecológicos."
- *               points:
- *                 type: number
- *                 example: 100
- *               badge:
- *                 type: string
- *                 example: "🌱"
+ *                name:
+ *                   type: string
+ *                   example: "Héroe del Agua"
+ *                description:
+ *                   type: string
+ *                   example: "Has ahorrado más de 100 litros de agua este mes."
+ *                icon:
+ *                   type: string
+ *                   example: "💧"
+ *                 userId:
+ *                   type: string
+ *                   example: "65f1a2b3c4d5e6f7a8b9c0d1"
  *     responses:
  *       201:
  *         description: "Logro ecológico creado correctamente"
