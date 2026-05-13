@@ -2,6 +2,7 @@ import { Router } from "express";
 import { ActionController } from "./action_controller";
 import { createActionSchema } from "./action_schema";
 import { validate } from "../../middlewares/validate.middleware";
+import { authMiddleware } from "../../middlewares/auth.middleware";
 
 const router = Router();
 const _controller = new ActionController();
@@ -51,7 +52,7 @@ const _controller = new ActionController();
  *       400:
  *         description: "Datos inválidos"
  */
-router.post('/', validate(createActionSchema), _controller.create);
+router.post('/', authMiddleware, validate(createActionSchema), _controller.create);
 
 /**
  * @openapi
@@ -65,7 +66,7 @@ router.post('/', validate(createActionSchema), _controller.create);
  *       200:
  *         description: "Listado de acciones obtenido correctamente"
  */
-router.get('/', _controller.findAll);
+router.get('/', authMiddleware, _controller.findAll);
 
 /**
  * @openapi
@@ -88,7 +89,7 @@ router.get('/', _controller.findAll);
  *       404:
  *         description: "Acción no encontrada"
  */
-router.get('/:id', _controller.findOne);
+router.get('/:id', authMiddleware, _controller.findOne);
 
 /**
  * @openapi
@@ -130,7 +131,7 @@ router.get('/:id', _controller.findOne);
  *       404:
  *         description: "Acción no encontrada"
  */
-router.put('/:id', _controller.update);
+router.put('/:id', authMiddleware, _controller.update);
 
 /**
  * @openapi
@@ -153,6 +154,6 @@ router.put('/:id', _controller.update);
  *       404:
  *         description: "Acción no encontrada"
  */
-router.delete('/:id', _controller.delete);
+router.delete('/:id', authMiddleware, _controller.delete);
 
 export default router;
