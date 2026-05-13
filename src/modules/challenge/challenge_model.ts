@@ -2,7 +2,7 @@ import { ObjectId } from 'mongodb';
 
 export interface Challenge {
   _id?: ObjectId;
-  title: string;
+  name: string;
   description: string;
   pointsReward: number;
   difficulty: 'Easy' | 'Medium' | 'Hard';
