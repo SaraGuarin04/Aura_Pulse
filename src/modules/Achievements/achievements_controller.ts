@@ -4,6 +4,27 @@ import { AchievementsService } from './achievements_service';
 export class AchievementsController {
   private _service = new AchievementsService();
 
+  create = async (req: Request, res: Response) => {
+    try {
+
+      const userId = (req as any).user?.sub;
+
+      if (!userId) {
+        return res.status(401).json({ error: "No autorizado: Token requerido" });
+      }
+
+      const achievementData = { 
+        ...req.body, 
+        userId: userId 
+      };
+
+      const data = await this._service.grantAchievement(achievementData);
+      res.status(201).json(data);
+    } catch (e: any) {
+      res.status(400).json({ error: e.message || "Error al crear logro" });
+    }
+  }
+
   getMine = async (req: Request, res: Response) => {
     try {
       const userId = (req as any).user?.sub; 
