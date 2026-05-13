@@ -41,20 +41,22 @@ router.get('/', authMiddleware, controller.getChallenges);
  *             type: object
  *             required:
  *               - title
- *               - description
+ *               - pointsReward
+ *               - difficulty
  *             properties:
  *               title:
  *                 type: string
- *                 example: "Reducir uso de plástico"
+ *                 example: "Semana sin carne"
  *               description:
  *                 type: string
- *                 example: "Evitar el uso de botellas plásticas durante una semana."
- *               points:
+ *                 example: "Reduce tu huella de carbono evitando el consumo de carne por 7 días."
+ *               pointsReward:
  *                 type: number
- *                 example: 50
+ *                 example: 200
  *               difficulty:
  *                 type: string
- *                 example: "medium"
+ *                 enum: ['Easy', 'Medium', 'Hard']
+ *                 example: "Medium"
  *     responses:
  *       201:
  *         description: "Reto ecológico creado correctamente"
