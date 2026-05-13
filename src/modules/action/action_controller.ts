@@ -6,27 +6,30 @@ export class ActionController {
     private _EcoActionService = new ActionService();
     
     create = async (req: Request, res: Response) => {
-        try {
+    try {
+  
+        const authUser = (req as any).user;
 
-            const authUser = (req as any).user;
-            const rawUserId = authUser?.id || authUser?._id || authUser?.sub;
+        const userId = authUser?.sub || req.body.userId;
 
-            if (!rawUserId) {
-                return res.status(401).json({ error: "Token inválido o sin ID de usuario" });
-            }
-
-            const userId = rawUserId.toString();
-
-            const actionData = req.body;
-
-
-            const result = await this._EcoActionService.registerAction(userId, actionData);
-            
-            res.status(201).json(result);
-        } catch (error: any) {
-            res.status(400).json({ error: error.message || "Error al crear la acción" });
+        if (!userId) {
+            return res.status(401).json({ 
+                error: "ID de usuario no encontrado en el token",
+                detalle: "El token debe contener la propiedad 'sub'" 
+            });
         }
+
+        const userIdStr = userId.toString();
+
+        const { userId: _, ...actionData } = req.body;
+
+        const result = await this._EcoActionService.registerAction(userIdStr, actionData);
+        
+        return res.status(201).json(result);
+    } catch (error: any) {
+        return res.status(400).json({ error: error.message || "Error al crear la acción" });
     }
+}
     findAll = async (_req: Request, res: Response) => {
         try {
             const result = await this._EcoActionService.findAll();
