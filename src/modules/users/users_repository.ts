@@ -1,5 +1,5 @@
 import { getDb } from "../../config/database";
-import { ObjectId } from "mongodb"; // Necesitamos esto para buscar por ID
+import { ObjectId } from "mongodb"; 
 
 export class UsersRepository {
     private collection(){
