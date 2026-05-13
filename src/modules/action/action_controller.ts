@@ -7,27 +7,33 @@ export class ActionController {
     
     create = async (req: Request, res: Response) => {
     try {
-  
+        
         const authUser = (req as any).user;
 
-        const userId = authUser?.sub || req.body.userId;
+        const userId = authUser?.sub?.toString() || 
+                       authUser?.id?.toString() || 
+                       req.body.userId?.toString();
 
         if (!userId) {
             return res.status(401).json({ 
-                error: "ID de usuario no encontrado en el token",
-                detalle: "El token debe contener la propiedad 'sub'" 
+                error: "No se encontró el ID de usuario",
+                token_data: authUser // Esto te dirá en Swagger qué hay dentro del token
             });
         }
 
-        const userIdStr = userId.toString();
+        const actionData = {
+            title: req.body.title,
+            category: req.body.category,
+            description: req.body.description,
+            value: req.body.value
+        };
 
-        const { userId: _, ...actionData } = req.body;
-
-        const result = await this._EcoActionService.registerAction(userIdStr, actionData);
+        const result = await this._EcoActionService.registerAction(userId, actionData);
         
-        return res.status(201).json(result);
+        res.status(201).json(result);
     } catch (error: any) {
-        return res.status(400).json({ error: error.message || "Error al crear la acción" });
+        // Si el ObjectId.isValid(userId) del servicio falla, caerá aquí
+        res.status(400).json({ error: error.message || "Error al registrar la acción" });
     }
 }
     findAll = async (_req: Request, res: Response) => {
