@@ -1,31 +1,32 @@
 import { Request, Response } from "express";
 import { ActionService } from "./action_service";
+import { ObjectId } from "mongodb";
 
 export class ActionController {
     private _EcoActionService = new ActionService();
     
     create = async (req: Request, res: Response) => {
-    try {
+        try {
 
-        const authUser = (req as any).user;
+            const authUser = (req as any).user;
+            const rawUserId = authUser?.id || authUser?._id || authUser?.sub;
 
-        const userId = authUser?.id || authUser?._id || authUser?.sub;
+            if (!rawUserId) {
+                return res.status(401).json({ error: "Token inválido o sin ID de usuario" });
+            }
 
-        if (!userId) {
-            return res.status(401).json({ 
-                error: "No se pudo identificar al usuario a través del token. ¿Estás logueado?" 
-            });
+            const userId = new ObjectId(rawUserId as string);
+
+            const actionData = req.body;
+
+
+            const result = await this._EcoActionService.registerAction(userId, actionData);
+            
+            res.status(201).json(result);
+        } catch (error: any) {
+            res.status(400).json({ error: error.message || "Error al crear la acción" });
         }
-
-        const actionData = req.body;
-
-        const result = await this._EcoActionService.registerAction(userId, actionData);
-        
-        res.status(201).json(result);
-    } catch (error: any) {
-        res.status(400).json({ error: error.message || "Error al crear la acción" });
     }
-}
     findAll = async (_req: Request, res: Response) => {
         try {
             const result = await this._EcoActionService.findAll();
