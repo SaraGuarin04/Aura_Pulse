@@ -7,7 +7,7 @@ const _AuthController = new AuthController();
 
 /**
  * @openapi
- * /api/v2/auth/register:
+ * /auth/register:
  *   post:
  *     tags:
  *       - Auth
@@ -46,7 +46,7 @@ router.post('/register', _AuthController.register);
 
 /**
  * @openapi
- * /api/v2//auth/login:
+ * /auth/login:
  *   post:
  *     tags:
  *       - Auth
@@ -78,7 +78,7 @@ router.post('/login', _AuthController.login);
 
 /**
  * @openapi
- * /api/v2/auth/profile:
+ * /auth/profile:
  *   get:
  *     tags:
  *       - Auth
@@ -96,7 +96,7 @@ router.get('/profile', authMiddleware, _AuthController.getProfile);
 
 /**
  * @openapi
- * /api/v2/auth/update-password:
+ * /auth/update-password:
  *   put:
  *     tags:
  *       - Auth
@@ -132,7 +132,7 @@ router.put('/update-password', authMiddleware, _AuthController.updatePassword);
 
 /**
  * @openapi
- * /api/v2/auth/delete-account:
+ * /auth/delete-account:
  *   delete:
  *     tags:
  *       - Auth
