@@ -1,6 +1,6 @@
 import { getDb } from "../../config/database";
 import { Actiondocument } from "./action_model";
-const { ObjectId } = require('mongodb'); // Para consistencia con tu código
+import { ObjectId } from 'mongodb';
 
 export class ActionRepository {
     private collection() {
