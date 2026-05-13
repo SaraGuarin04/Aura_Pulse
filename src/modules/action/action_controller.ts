@@ -7,19 +7,25 @@ export class ActionController {
     
     create = async (req: Request, res: Response) => {
     try {
-        
+  
         const authUser = (req as any).user;
+        
+        console.log("DEBUG: Contenido de req.user ->", JSON.stringify(authUser));
 
-        const userId = authUser?.sub?.toString() || 
-                       authUser?.id?.toString() || 
-                       req.body.userId?.toString();
+        const idFromToken = authUser?.sub || authUser?.id || authUser?._id;
+        const idFromBody = req.body.userId;
 
-        if (!userId) {
+        const finalUserId = idFromToken || idFromBody;
+
+        if (!finalUserId) {
             return res.status(401).json({ 
-                error: "No se encontró el ID de usuario",
-                token_data: authUser // Esto te dirá en Swagger qué hay dentro del token
+                error: "ID de usuario no encontrado",
+                ayuda: "El token no tiene 'sub'. Revisa el log de Render.",
+                token_recibido: authUser // Esto te dirá en Swagger qué hay dentro
             });
         }
+
+        const userIdStr = finalUserId.toString();
 
         const actionData = {
             title: req.body.title,
@@ -28,12 +34,13 @@ export class ActionController {
             value: req.body.value
         };
 
-        const result = await this._EcoActionService.registerAction(userId, actionData);
+        const result = await this._EcoActionService.registerAction(userIdStr, actionData);
         
-        res.status(201).json(result);
+        return res.status(201).json(result);
+
     } catch (error: any) {
-        // Si el ObjectId.isValid(userId) del servicio falla, caerá aquí
-        res.status(400).json({ error: error.message || "Error al registrar la acción" });
+        console.error("Error en el controlador:", error);
+        return res.status(400).json({ error: error.message || "Error inesperado" });
     }
 }
     findAll = async (_req: Request, res: Response) => {
