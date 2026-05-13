@@ -6,7 +6,7 @@ export class ActionController {
     
     create = async (req: Request, res: Response) => {
     try {
-        
+
         const authUser = (req as any).user;
 
         const userId = authUser?.id || authUser?._id || authUser?.sub;
