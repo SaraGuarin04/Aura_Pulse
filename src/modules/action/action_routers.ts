@@ -8,7 +8,7 @@ const _controller = new ActionController();
 
 /**
  * @openapi
- * /api/v2/actions:
+ * /actions:
  *   post:
  *     tags:
  *       - Actions
@@ -46,7 +46,7 @@ router.post('/', validate(createActionSchema), _controller.create);
 
 /**
  * @openapi
- * /api/v2/actions:
+ * /actions:
  *   get:
  *     tags:
  *       - Actions
@@ -83,7 +83,7 @@ router.get('/:id', _controller.findOne);
 
 /**
  * @openapi
- * /api/v2/actions/{id}:
+ * /actions/{id}:
  *   put:
  *     tags:
  *       - Actions
@@ -125,7 +125,7 @@ router.put('/:id', _controller.update);
 
 /**
  * @openapi
- * /api/v2/actions/{id}:
+ * /actions/{id}:
  *   delete:
  *     tags:
  *       - Actions
