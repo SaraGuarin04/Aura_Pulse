@@ -40,11 +40,11 @@ router.get('/', authMiddleware, controller.getChallenges);
  *           schema:
  *             type: object
  *             required:
- *               - title
+ *               - name
  *               - pointsReward
  *               - difficulty
  *             properties:
- *               title:
+ *               name:
  *                 type: string
  *                 example: "Semana sin carne"
  *               description:
