@@ -1,48 +1,31 @@
 import { Request, Response } from "express";
 import { ActionService } from "./action_service";
+import { AuthRequest } from "../shared/types/auth-request";
 import { ObjectId } from "mongodb";
 
 export class ActionController {
     private _EcoActionService = new ActionService();
     
-    create = async (req: Request, res: Response) => {
-    try {
-  
-        const authUser = (req as any).user;
-        
-        console.log("DEBUG: Contenido de req.user ->", JSON.stringify(authUser));
+    create = async (req: AuthRequest, res: Response) => {
+        try {
 
-        const idFromToken = authUser?.sub || authUser?.id || authUser?._id;
-        const idFromBody = req.body.userId;
+            const userId = req.user?.sub;
 
-        const finalUserId = idFromToken || idFromBody;
+            if (!userId) {
+                return res.status(401).json({ 
+                    error: "ID de usuario (sub) no encontrado en el token",
+                    user_data_received: req.user // Esto te mostrará en Swagger si req.user llegó vacío
+                });
+            }
 
-        if (!finalUserId) {
-            return res.status(401).json({ 
-                error: "ID de usuario no encontrado",
-                ayuda: "El token no tiene 'sub'. Revisa el log de Render.",
-                token_recibido: authUser // Esto te dirá en Swagger qué hay dentro
-            });
+            const result = await this._EcoActionService.registerAction(userId, req.body);
+            
+            return res.status(201).json(result);
+
+        } catch (error: any) {
+            return res.status(400).json({ error: error.message || "Error al crear la acción" });
         }
-
-        const userIdStr = finalUserId.toString();
-
-        const actionData = {
-            title: req.body.title,
-            category: req.body.category,
-            description: req.body.description,
-            value: req.body.value
-        };
-
-        const result = await this._EcoActionService.registerAction(userIdStr, actionData);
-        
-        return res.status(201).json(result);
-
-    } catch (error: any) {
-        console.error("Error en el controlador:", error);
-        return res.status(400).json({ error: error.message || "Error inesperado" });
     }
-}
     findAll = async (_req: Request, res: Response) => {
         try {
             const result = await this._EcoActionService.findAll();
