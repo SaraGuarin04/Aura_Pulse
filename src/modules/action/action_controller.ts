@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ActionService } from "./action_service";
-import { AuthRequest } from "../shared/types/auth-request";
+import { AuthRequest } from "../../shared/types/auth-request";
 import { ObjectId } from "mongodb";
 
 export class ActionController {
