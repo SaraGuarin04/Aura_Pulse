@@ -23,16 +23,7 @@ export class ActionController {
             res.status(400).json({ error: error.message || "Error al crear la acción" });
         }
     }
-
-    findAll = async (_req: AuthRequest, res: Response) => {
-        try {
-            const result = await this._EcoActionService.findAll();
-            res.status(200).json(result);
-        } catch (error) {
-            res.status(500).json({ error: "Error al obtener acciones" });
-        }
-    }
-}
+    
     findAll = async (_req: Request, res: Response) => {
         try {
             const result = await this._EcoActionService.findAll();
