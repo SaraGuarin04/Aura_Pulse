@@ -2,8 +2,8 @@ import { Router } from "express";
 import { UsersController } from "./users_controllers";
 import { createUserSchema } from "./users_schema";
 import { validate } from "../../middlewares/validate.middleware";
-import { isAdmin } from "../../middlewares/role.middlewares";
-import { authMiddleware } from "../../middlewares/auth.middlewares";
+import { isAdmin } from "../../middlewares/role.middleware";
+import { authMiddleware } from "../../middlewares/auth.middleware";
 
 const router = Router();
 const _UsersController = new UsersController();
