@@ -2,7 +2,6 @@ import { Router } from "express";
 import { UsersController } from "./users_controllers";
 import { createUserSchema } from "./users_schema";
 import { validate } from "../../middlewares/validate.middleware";
-import { isAdmin } from "../../middlewares/role.middleware";
 import { authMiddleware } from "../../middlewares/auth.middleware";
 
 const router = Router();
@@ -62,7 +61,7 @@ router.post('/register', validate(createUserSchema), _UsersController.register);
  *       200:
  *         description: "Usuarios obtenidos correctamente"
  */
-router.get('/', authMiddleware, isAdmin, _UsersController.findAllUsers);
+router.get('/', authMiddleware, _UsersController.findAllUsers);
 
 /**
  * @openapi
@@ -85,7 +84,7 @@ router.get('/', authMiddleware, isAdmin, _UsersController.findAllUsers);
  *       404:
  *         description: "Usuario no encontrado"
  */
-router.get('/:id', authMiddleware, isAdmin, _UsersController.findOneUser);
+router.get('/:id', authMiddleware, _UsersController.findOneUser);
 
 /**
  * @openapi
@@ -150,6 +149,6 @@ router.put('/:id', authMiddleware, _UsersController.updateUser);
  *       404:
  *         description: "Usuario no encontrado"
  */
-router.delete('/:id', authMiddleware, isAdmin, _UsersController.deleteUser);
+router.delete('/:id', authMiddleware, _UsersController.deleteUser);
 
 export default router;
