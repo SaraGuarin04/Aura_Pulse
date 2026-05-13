@@ -15,7 +15,7 @@ export class ActionController {
                 return res.status(401).json({ error: "Token inválido o sin ID de usuario" });
             }
 
-            const userId = new ObjectId(rawUserId as string);
+            const userId = rawUserId.toString();
 
             const actionData = req.body;
 
