@@ -6,25 +6,30 @@ export class ActionController {
 
     create = async (req: Request, res: Response) => {
     try {
-
-        const user = (req as any).user;
+  
+        const authUser = (req as any).user;
         
-        const userId = req.body.userId || user?.id || user?._id || user?.userId;
+        const userId = req.body.userId || authUser?.id || authUser?._id || authUser?.sub;
+        
+        console.log("DEBUG - userId encontrado:", userId);
+        console.log("DEBUG - Body recibido:", req.body);
 
         if (!userId) {
-            console.log("CONTENIDO DE REQ.USER:", user); 
             return res.status(401).json({ 
                 error: "ID de usuario no proporcionado",
-                debug: "Revisa los logs de la consola" 
+                ayuda: "Asegúrate de estar logueado o enviar userId en el JSON",
+                tokenData: authUser // Esto nos dirá qué está viendo el controlador
             });
         }
 
-        const { userId: _, ...actionData } = req.body; 
+        const { userId: _, ...actionData } = req.body;
         
-        const result = await this._EcoActionService.registerAction(userId, actionData);
-        res.status(201).json(result);
+        const result = await this._EcoActionService.registerAction(userId.toString(), actionData);
+        
+        return res.status(201).json(result);
     } catch (error: any) {
-        res.status(400).json({ error: error.message || "Error al crear la acción" });
+        console.error("ERROR EN CREATE ACTION:", error);
+        return res.status(400).json({ error: error.message || "Error al crear la acción" });
     }
 }
     findAll = async (_req: Request, res: Response) => {
