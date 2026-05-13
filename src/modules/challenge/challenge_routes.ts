@@ -7,7 +7,7 @@ const controller = new ChallengesController();
 
 /**
  * @openapi
- * /api/v2/challenges:
+ * /challenges:
  *   get:
  *     tags:
  *       - Challenges
@@ -25,7 +25,7 @@ router.get('/', authMiddleware, controller.getChallenges);
 
 /**
  * @openapi
- * /api/v2/challenges:
+ * /challenges:
  *   post:
  *     tags:
  *       - Challenges
@@ -67,7 +67,7 @@ router.post('/', authMiddleware, controller.postChallenge);
 
 /**
  * @openapi
- * /api/v2/challenges/{id}:
+ * /challenges/{id}:
  *   put:
  *     tags:
  *       - Challenges
@@ -113,7 +113,7 @@ router.put('/:id', authMiddleware, controller.updateChallenge);
 
 /**
  * @openapi
- * /api/v2/challenges/{id}:
+ * /challenges/{id}:
  *   delete:
  *     tags:
  *       - Challenges
