@@ -8,7 +8,7 @@ const _UsersController = new UsersController();
 
 /**
  * @openapi
- * /api/v2/users/register:
+ * /users/register:
  *   post:
  *     tags:
  *       - Users
@@ -50,7 +50,7 @@ router.post('/register', validate(createUserSchema), _UsersController.register);
 
 /**
  * @openapi
- * /api/v2/users:
+ * /users:
  *   get:
  *     tags:
  *       - Users
@@ -64,7 +64,7 @@ router.get('/', _UsersController.findAllUsers);
 
 /**
  * @openapi
- * /api/v2/users/{id}:
+ * /users/{id}:
  *   get:
  *     tags:
  *       - Users
@@ -87,7 +87,7 @@ router.get('/:id', _UsersController.findOneUser);
 
 /**
  * @openapi
- * /api/v2/users/{id}:
+ * /users/{id}:
  *   put:
  *     tags:
  *       - Users
@@ -129,7 +129,7 @@ router.put('/:id', _UsersController.updateUser);
 
 /**
  * @openapi
- * /api/v2/users/{id}:
+ * /users/{id}:
  *   delete:
  *     tags:
  *       - Users
