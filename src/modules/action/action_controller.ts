@@ -5,13 +5,27 @@ export class ActionController {
     private _EcoActionService = new ActionService();
     
     create = async (req: Request, res: Response) => {
-        try {
-            const result = await this._EcoActionService.registerAction(req.body);
-            res.status(201).json(result);
-        } catch (error: any) {
-            res.status(400).json({ error: error.message || "Error al crear la acción" });
+    try {
+        
+        const authUser = (req as any).user;
+
+        const userId = authUser?.id || authUser?._id || authUser?.sub;
+
+        if (!userId) {
+            return res.status(401).json({ 
+                error: "No se pudo identificar al usuario a través del token. ¿Estás logueado?" 
+            });
         }
+
+        const actionData = req.body;
+
+        const result = await this._EcoActionService.registerAction(userId, actionData);
+        
+        res.status(201).json(result);
+    } catch (error: any) {
+        res.status(400).json({ error: error.message || "Error al crear la acción" });
     }
+}
     findAll = async (_req: Request, res: Response) => {
         try {
             const result = await this._EcoActionService.findAll();
