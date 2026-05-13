@@ -21,21 +21,30 @@ const _controller = new ActionController();
  *           schema:
  *             type: object
  *             required:
+ *               - userId
  *               - title
- *               - description
+ *               - category
+ *               - value
  *             properties:
+ *               userId:
+ *                   type: string
+ *                   example: "65f1a2b3c4d5e6f7a8b9c0d1"
  *               title:
- *                 type: string
- *                 example: "Reciclaje de plástico"
+ *                    type: string
+ *                    example: "Reciclaje de botellas PET"
+ *               category:
+ *                     type: string
+ *                     enum: ['Reciclaje', 'Transporte', 'Energia', 'Agua', 'Otro']
+ *                     example: "Reciclaje"
  *               description:
- *                 type: string
- *                 example: "Reciclar 10 botellas plásticas en puntos autorizados."
- *               status:
- *                 type: string
- *                 example: "pending"
- *               points:
- *                 type: number
- *                 example: 30
+ *                     type: string
+ *                     example: "Se reciclaron 5 botellas de plástico en el punto limpio."
+ *               value:
+ *                     type: number
+ *                     example: 5
+ *               auraPoints:
+ *                     type: number
+ *                     example: 50
  *     responses:
  *       201:
  *         description: "Acción ecológica creada correctamente"
