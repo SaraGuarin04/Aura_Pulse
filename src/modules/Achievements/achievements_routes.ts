@@ -7,7 +7,7 @@ const controller = new AchievementsController();
 
 /**
  * @openapi
- * /api/v2/achievements/my:
+ * /achievements/my:
  *   get:
  *     tags:
  *       - Achievements
@@ -25,7 +25,7 @@ router.get('/my', authMiddleware, controller.getMine);
 
 /**
  * @openapi
- * /api/v2/achievements/{id}:
+ * /achievements/{id}:
  *   get:
  *     tags:
  *       - Achievements
@@ -52,7 +52,7 @@ router.get('/:id', authMiddleware, controller.getOne);
 
 /**
  * @openapi
- * /api/v2/achievements:
+ * /achievements:
  *   post:
  *     tags:
  *       - Achievements
@@ -94,7 +94,7 @@ router.post('/', authMiddleware, controller.create);
 
 /**
  * @openapi
- * /api/v2/achievements/{id}:
+ * /achievements/{id}:
  *   put:
  *     tags:
  *       - Achievements
@@ -140,7 +140,7 @@ router.put('/:id', authMiddleware, controller.update);
 
 /**
  * @openapi
- * /api/v2/achievements/{id}:
+ * /achievements/{id}:
  *   delete:
  *     tags:
  *       - Achievements
