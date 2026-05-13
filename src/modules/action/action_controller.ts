@@ -14,7 +14,7 @@ export class ActionController {
             if (!userId) {
                 return res.status(401).json({ 
                     error: "ID de usuario (sub) no encontrado en el token",
-                    user_data_received: req.user // Esto te mostrará en Swagger si req.user llegó vacío
+                    user_data_received: req.user 
                 });
             }
 
