@@ -6,20 +6,19 @@ export class ActionController {
 
     create = async (req: Request, res: Response) => {
     try {
-    
-        const userIdFromBody = req.body.userId;
-        const userPayload = (req as any).user;
-    
-        const userIdFromToken = userPayload?.id || userPayload?._id || userPayload?.sub;
+
+        const user = (req as any).user;
         
-        const userId = userIdFromBody || userIdFromToken;
+        const userId = req.body.userId || user?.id || user?._id || user?.userId;
 
         if (!userId) {
-            // Si después de buscar en todo lado no hay ID, ahí sí lanzamos error
-            return res.status(401).json({ error: "ID de usuario no proporcionado o token inválido" });
+            console.log("CONTENIDO DE REQ.USER:", user); 
+            return res.status(401).json({ 
+                error: "ID de usuario no proporcionado",
+                debug: "Revisa los logs de la consola" 
+            });
         }
 
-        // 2. Limpiamos el body para no enviar el userId duplicado al servicio
         const { userId: _, ...actionData } = req.body; 
         
         const result = await this._EcoActionService.registerAction(userId, actionData);
@@ -28,7 +27,6 @@ export class ActionController {
         res.status(400).json({ error: error.message || "Error al crear la acción" });
     }
 }
-
     findAll = async (_req: Request, res: Response) => {
         try {
             const result = await this._EcoActionService.findAll();
