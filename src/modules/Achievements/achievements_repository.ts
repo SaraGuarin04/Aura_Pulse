@@ -7,11 +7,9 @@ export class AchievementsRepository {
     return getDb().collection<Achievement>('achievements');
   }
 
-  async getByUser(userId: string) {
-  return await this.collection().find({ 
-    userId: new ObjectId(userId)
-  }).toArray();
-}
+    async getByUser(userId: string) {
+    return await this.collection().find({ userId: new ObjectId(userId) }).toArray();
+  }
 
   async findById(id: string) {
     return await this.collection().findOne({ _id: new ObjectId(id) });
