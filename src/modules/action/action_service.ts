@@ -1,9 +1,12 @@
 import { ActionRepository } from "./action_repository";
 import { Actiondocument } from "./action_model";
 import { ObjectId } from "mongodb"; 
+// IMPORTANTE: Asegúrate de que la ruta al AchievementsService sea la correcta
+import { AchievementsService } from "../achievements/achievements_service"; 
 
 export class ActionService {
     private repository = new ActionRepository();
+    private _achievementService = new AchievementsService();
 
     async registerAction(userId: string, data: any) {
         if (!ObjectId.isValid(userId)) {
@@ -22,7 +25,16 @@ export class ActionService {
             createdAT: new Date()
         };
 
-        return await this.repository.create(newAction);
+        const result = await this.repository.create(newAction);
+
+        try {
+            await this._achievementService.checkAndGrant(userId);
+        } catch (error) {
+   
+            console.error("Error al procesar logros automáticos:", error);
+        }
+
+        return result;
     }
 
     async findAll() {
@@ -41,7 +53,14 @@ export class ActionService {
             data.auraPoints = data.value * 10;
         }
 
-        return await this.repository.update(id, data);
+        const result = await this.repository.update(id, data);
+
+        const action = await this.repository.findById(id);
+        if (action) {
+            await this._achievementService.checkAndGrant(action.userId.toString());
+        }
+
+        return result;
     }
 
     async deleteAction(id: string) {
