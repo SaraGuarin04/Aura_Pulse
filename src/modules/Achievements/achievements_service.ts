@@ -18,6 +18,35 @@ export class AchievementsService {
     return await this.repository.findById(id);
   }
 
+async checkAndGrant(userId: string) {
+
+    const actionRepo = new ActionRepository(); 
+    const actions = await actionRepo.findByUserId(userId);
+    const totalPoints = actions.reduce((sum, action) => sum + (action.auraPoints || 0), 0);
+
+
+    const milestones = [
+        { name: "Eco-Principiante", points: 10, icon: "🌱", desc: "Registraste tu primera acción" },
+        { name: "Eco-Guerrero", points: 100, icon: "🛡️", desc: "Alcanzaste los 100 puntos de aura" },
+        { name: "Maestro del Planeta", points: 500, icon: "🌍", desc: "¡Eres una leyenda de la sostenibilidad!" }
+    ];
+
+    for (const milestone of milestones) {
+        if (totalPoints >= milestone.points) {
+            try {
+                await this.grantAchievement({
+                    userId,
+                    name: milestone.name,
+                    description: milestone.desc,
+                    icon: milestone.icon
+                });
+            } catch (error) {
+       
+            }
+        }
+    }
+}
+
   async grantAchievement(data: { userId: string, name: string, description: string, icon: string }) {
     // 1. Validar que el userId sea correcto
     if (!data.userId || !ObjectId.isValid(data.userId)) {
