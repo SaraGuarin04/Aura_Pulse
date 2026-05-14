@@ -6,11 +6,10 @@ export class AchievementsService {
   private repository = new AchievementsRepository();
 
   async getMyAchievements(userId: string) {
-    if (!ObjectId.isValid(userId)) {
-        throw new Error("ID de usuario inválido");
-    }
-    return await this.repository.getByUser(userId);
-  }
+  if (!ObjectId.isValid(userId)) throw new Error("ID de usuario inválido");
+  
+  return await this.repository.getByUser(userId);
+}
 
   async getById(id: string) {
     if (!ObjectId.isValid(id)) {
