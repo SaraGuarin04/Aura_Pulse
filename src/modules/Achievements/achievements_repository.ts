@@ -8,8 +8,10 @@ export class AchievementsRepository {
   }
 
   async getByUser(userId: string) {
-    return await this.collection().find({ userId: new ObjectId(userId) }).toArray();
-  }
+  return await this.collection().find({ 
+    userId: new ObjectId(userId)
+  }).toArray();
+}
 
   async findById(id: string) {
     return await this.collection().findOne({ _id: new ObjectId(id) });
