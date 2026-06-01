@@ -9,7 +9,7 @@ const _controller = new ActionController();
 
 /**
  * @openapi
- * /action:
+ * /actions:
  *   post:
  *     tags:
  *       - Actions
@@ -52,7 +52,7 @@ router.post('/', authMiddleware, validate(createActionSchema), _controller.creat
 
 /**
  * @openapi
- * /action:
+ * /actions:
  *   get:
  *     tags:
  *       - Actions
@@ -66,7 +66,7 @@ router.get('/', authMiddleware, _controller.findAll);
 
 /**
  * @openapi
- * /action/{id}:
+ * /actions/{id}:
  *   get:
  *     tags:
  *       - Actions
@@ -89,7 +89,7 @@ router.get('/:id', authMiddleware, _controller.findOne);
 
 /**
  * @openapi
- * /action/{id}:
+ * /actions/{id}:
  *   put:
  *     tags:
  *       - Actions
@@ -131,7 +131,7 @@ router.put('/:id', authMiddleware, _controller.update);
 
 /**
  * @openapi
- * /action/{id}:
+ * /actions/{id}:
  *   delete:
  *     tags:
  *       - Actions
