@@ -9,7 +9,7 @@ const router = Router();
 
 router.use('/auth', AuthRouter);
 router.use('/users', UserRouter);
-router.use('/action', ActionRouter);
+router.use('/actions', ActionRouter);
 router.use('/challenges', challengeRoutes);
 router.use('/achievements', achievementRoutes);
 
